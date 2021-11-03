@@ -2,8 +2,6 @@
 
 exports[`defaults 1`] = `
 Array [
-  ".gitignore",
-  "LICENSE",
-  "README.md",
+  ".release-it.json",
 ]
 `;
