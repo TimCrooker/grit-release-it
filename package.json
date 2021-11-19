@@ -1,6 +1,6 @@
 {
 	"name": "grit-release-it",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"description": "easily add release scripts and release automation to your project",
 	"repository": {
 		"url": "TimCrooker/grit-release-it",
@@ -8,6 +8,11 @@
 	},
 	"author": "TimCrooker <timothycrooker@gmail.com> (github.com/TimCrooker)",
 	"license": "MIT",
+	"keywords": [
+		"grit-generator",
+		"grit",
+		"release-it"
+	],
 	"files": [
 		"generator.js",
 		"template/**"
