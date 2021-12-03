@@ -27,9 +27,6 @@ export = {
 		})
 
 	},
-	data() {
-		
-	},
 	plugins: {
 		mergeFiles: ['.release-it.json']
 	},
@@ -38,19 +35,20 @@ export = {
       files: '**'
     })
 
-		this.modify({
-			files: 'package.json',
-			handler: (data) => {
-				return grit.mergeObjects(data, [{
-					scripts: {
-						release: "release-it"
-					},
-					devDependencies: {
-						"release-it": "^14.11.8"
-					}
-				}])
-			}
-		})
+	this.modify({
+		files: 'package.json',
+		handler: (data) => {
+			return grit.mergeObjects(data, [{
+				scripts: {
+					release: "release-it"
+				},
+				devDependencies: {
+					"release-it": "^14.11.8"
+				}
+			}])
+
+		}
+	})
 	},
   async completed(grit) {
     await grit.npmInstall()

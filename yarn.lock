@@ -2563,9 +2563,9 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4:
   integrity sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==
 
 grit-cli@^0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/grit-cli/-/grit-cli-0.4.1.tgz#4f0d68e36234ac446dcaf071c857324aaa06dfa9"
-  integrity sha512-ChBCr1ceIoHTeGbEXcuL6+UYFjIjzUbSq6XuUdT2xe8nPNDij5BDRCllLMoi1AtVJufH2jsHjrzroqAjW5sx0A==
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/grit-cli/-/grit-cli-0.4.2.tgz#0549081e440fb701b3a0e1c17be8e4dad951cb6f"
+  integrity sha512-c13zveQPd6N4e/bVxt8bK4nAL1iDEYplzONT5RsWm6Xctaq6Z1cPWg6vKJvf1exUxueQRMgTFlVTU4cxABTKdw==
   dependencies:
     axios "^0.24.0"
     chalk "^4.1.2"
