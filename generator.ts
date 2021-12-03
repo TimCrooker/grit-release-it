@@ -1,54 +1,58 @@
-import path from "path"
 import { GeneratorConfig } from "grit-cli"
 
 export = {
-  prompts(grit) {
-		this.input({
-			name: 'name',
-			message: 'What is the name of the new project',
-			default: `${path.basename(grit.outDir)}`,
-			filter: val => val.toLowerCase(),
+	prepare(grit) {
+		// if there is not a project at the outdir then exit the generator with error
+		if(!grit.pkg) {
+			throw new Error("This generator is meant to be run in existing projects but there is no package.json detected.")
+		}
+	},
+	prompts() {
+		this.confirm({
+			plugin: true,
+			name: 'npm-publish',
+			message: 'Do you want to publish to npm?'
 		})
-		this.input({
-			name: 'description',
-			message: 'How would you describe the new template',
-			default: `my awesome NEW generator`
+
+		this.confirm({
+			plugin: true,
+			name: 'git-push',
+			message: 'Do you want to push git to remote?'
 		})
-		this.input({
-			name: 'username',
-			message: 'What is your GitHub username',
-			default: grit.gitUser.username || grit.gitUser.name,
-			filter: val => val.toLowerCase(),
-			store: true
+		
+		this.confirm({
+			plugin: true,
+			name: 'github-release',
+			message: 'Do you want to release to github?'
 		})
-		this.input({
-			name: 'email',
-			message: 'What is your email?',
-			default: grit.gitUser.email,
-			store: true
-		})
-		this.input({
-			name: 'website',
-			message: 'The URL of your website',
-			default(data) {
-				return `github.com/${data.answers.username}`
-			},
-			store: true
-		})
-  },
-  actions() {
+
+	},
+	data() {
+		
+	},
+	plugins: {
+		mergeFiles: ['.release-it.json']
+	},
+  actions(grit) {
 		this.add({
       files: '**'
     })
-    this.move({
-      patterns: {
-				'_package.json': 'package.json'
-      }
-    })
+
+		this.modify({
+			files: 'package.json',
+			handler: (data) => {
+				return grit.mergeObjects(data, [{
+					scripts: {
+						release: "release-it"
+					},
+					devDependencies: {
+						"release-it": "^14.11.8"
+					}
+				}])
+			}
+		})
 	},
   async completed(grit) {
-    grit.gitInit()
     await grit.npmInstall()
-    grit.showProjectTips()
   }
 } as GeneratorConfig
