@@ -1,4 +1,9 @@
 {
+  "hooks": {
+    "before:init": [
+      "npm run test"
+    ]
+  },
   "npm": {
     "publish": true
   },

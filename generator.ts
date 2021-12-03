@@ -46,9 +46,42 @@ export = {
 					"release-it": "^14.11.8"
 				}
 			}])
+			}
+		})
 
+		// add testing hook to the release-it config
+		if (grit.pkg?.scripts?.test){
+			grit.logger.debug("Adding test hook to release-it config")
+			this.modify({
+				files: '.release-it.json',
+				handler: (data) => {
+					return grit.mergeObjects(data, [{
+						hooks: {
+							"before:init": [
+								"npm run test"
+							]
+						}
+					}])
+				}
+			})
 		}
-	})
+
+		// add testing hook to the release-it config
+		if (grit.pkg?.scripts?.build){
+			grit.logger.debug("Adding build hook to release-it config")
+			this.modify({
+				files: '.release-it.json',
+				handler: (data) => {
+					return grit.mergeObjects(data, [{
+						hooks: {
+							"before:init": [
+								"npm run build"
+							]
+						}
+					}])
+				}
+			})
+		}
 	},
   async completed(grit) {
     await grit.npmInstall()
